@@ -10,9 +10,9 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use((req, res, next) => {
-    const now = new Date().toString()
-    console.log(`Requested ${req.url} at ${now}`)
-    next()
+  const now = new Date().toString()
+  console.log(`Requested ${req.url} at ${now}`)
+  next()
 })
 
 // Database Setup
