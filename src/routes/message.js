@@ -6,16 +6,20 @@ const Message = require('../models/message')
 
 router.get('/', (req, res) => {
   Message.find().then(
-    messages => res.join(messages)
-  )
+    messages => res.json({ messages })
+  ).catch(err => {
+    throw err.message
+  })
 })
 
 router.get('/:messageId', (req, res) => {
   Message.findById(
     req.params.messageId
   ).then(
-    message => res.json(message)
-  )
+    message => res.json({ message })
+  ).catch(err => {
+    throw err.message
+  })
 })
 
 router.post('/', (req, res) => {
@@ -26,7 +30,7 @@ router.post('/', (req, res) => {
     user.messages.unshift(message)
     return user.save()
   }).then(
-    () => res.send(message)
+    () => res.json({ message })
   ).catch(err => {
     throw err.message
   })
